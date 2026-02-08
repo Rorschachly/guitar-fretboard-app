@@ -1,0 +1,967 @@
+/* ================================
+   CSS RESET & BASE STYLES
+   ================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color Palette */
+    --bg-gradient-start: #1a0a2e;
+    --bg-gradient-mid: #16213e;
+    --bg-gradient-end: #0f0f23;
+    
+    /* Glass Panel Colors */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Accent Colors */
+    --accent-cyan: #00f5ff;
+    --accent-amber: #ffb800;
+    --accent-purple: #a855f7;
+    
+    /* Text Colors */
+    --text-primary: rgba(255, 255, 255, 0.95);
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    
+    /* Fretboard Colors */
+    --fretboard-wood: linear-gradient(180deg, #2d1f1a 0%, #1a1210 50%, #2d1f1a 100%);
+    --fret-color: linear-gradient(180deg, #c0c0c0 0%, #888888 50%, #c0c0c0 100%);
+    --nut-color: #f5f5dc;
+    --string-color: linear-gradient(90deg, #d4af37, #c0c0c0, #d4af37);
+    
+    /* Timing */
+    --transition-fast: 0.15s ease-in-out;
+    --transition-normal: 0.25s ease-in-out;
+    --transition-slow: 0.4s ease-in-out;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ================================
+   APP CONTAINER & LAYOUT
+   ================================ */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================================
+   HEADER STYLES
+   ================================ */
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.app-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(0, 245, 255, 0.3);
+    margin-bottom: 0.25rem;
+}
+
+.app-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+}
+
+/* ================================
+   MAIN CONTENT
+   ================================ */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ================================
+   GLASSMORPHISM PANELS
+   ================================ */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: 
+        0 8px 32px var(--glass-shadow),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    transition: all var(--transition-normal);
+}
+
+.glass-panel:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+        0 -1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+/* ================================
+   SEARCH PANEL
+   ================================ */
+.search-panel {
+    padding: 1rem 1.5rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: all var(--transition-normal);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 
+        0 0 0 3px rgba(0, 245, 255, 0.1),
+        0 0 20px rgba(0, 245, 255, 0.15);
+}
+
+.search-btn {
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 0.875rem 1.25rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 245, 255, 0.3);
+}
+
+.search-btn:active {
+    transform: translateY(0);
+}
+
+/* ================================
+   FRETBOARD PANEL
+   ================================ */
+.fretboard-panel {
+    padding: 2rem;
+    overflow-x: auto;
+}
+
+.fretboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 900px;
+}
+
+/* Fret Numbers */
+.fret-numbers {
+    display: flex;
+    margin-left: 50px;
+}
+
+.fret-number {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Fret 0 matches the nut width */
+.fret-number:first-child {
+    flex: 0 0 8px;
+    width: 8px;
+}
+
+/* Frets 1-22 distributed evenly */
+.fret-number:not(:first-child) {
+    flex: 1;
+}
+
+/* The Fretboard */
+.fretboard {
+    position: relative;
+    height: 180px;
+    background: var(--fretboard-wood);
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(0, 0, 0, 0.3) inset,
+        0 2px 0 rgba(255, 255, 255, 0.05) inset;
+    overflow: visible; /* Allow note markers to extend beyond fretboard bounds */
+}
+
+/* Nut (the bone/plastic piece at the headstock end) */
+.nut {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        var(--nut-color) 0%, 
+        #d4d4b8 50%,
+        var(--nut-color) 100%
+    );
+    box-shadow: 
+        2px 0 8px rgba(0, 0, 0, 0.4),
+        1px 0 0 rgba(255, 255, 255, 0.3) inset;
+    z-index: 10;
+}
+
+/* Frets Container */
+.frets {
+    position: absolute;
+    left: 8px;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+}
+
+/* Individual Fret */
+.fret {
+    flex: 1;
+    border-right: 3px solid;
+    border-image: var(--fret-color) 1;
+    box-shadow: 
+        1px 0 3px rgba(0, 0, 0, 0.5),
+        -1px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Fret Markers Container - matches frets layout */
+.fret-markers {
+    position: absolute;
+    left: 8px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Each fret space in the marker grid */
+.marker-space {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* The actual dot marker */
+.marker {
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(200, 200, 180, 0.6) 40%,
+        rgba(180, 180, 160, 0.8) 100%
+    );
+    border-radius: 50%;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(0, 0, 0, 0.2) inset;
+}
+
+/* Double marker at 12th fret - two dots */
+.marker-space.double {
+    flex-direction: column;
+    gap: 60px;
+}
+
+.marker-space.double .marker:last-child {
+    /* Second dot already created in JS */
+}
+
+/* Strings Container */
+.strings {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 15px;
+    bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 5;
+}
+
+/* Individual Strings with varying thickness */
+.string {
+    width: 100%;
+    background: var(--string-color);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* String thickness - Low E (thickest) to High E (thinnest) */
+.string-6 { height: 5px; background: linear-gradient(180deg, #8b7355 0%, #5c4d3d 50%, #8b7355 100%); }
+.string-5 { height: 4px; background: linear-gradient(180deg, #a08060 0%, #705840 50%, #a08060 100%); }
+.string-4 { height: 3.5px; background: linear-gradient(180deg, #b8a080 0%, #887050 50%, #b8a080 100%); }
+.string-3 { height: 2.5px; background: linear-gradient(180deg, #d4c4a8 0%, #a09078 50%, #d4c4a8 100%); }
+.string-2 { height: 2px; background: linear-gradient(180deg, #e8e0d0 0%, #c0b0a0 50%, #e8e0d0 100%); }
+.string-1 { height: 1.5px; background: linear-gradient(180deg, #f0ece4 0%, #d0c8b8 50%, #f0ece4 100%); }
+
+.string:hover {
+    filter: brightness(1.3);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+}
+
+/* String Labels */
+.string-labels {
+    position: absolute;
+    left: -40px;
+    top: 15px;
+    bottom: 15px;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.string-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+/* ================================
+   CONTROL PANEL
+   ================================ */
+.control-panel {
+    padding: 1.25rem 1.5rem;
+}
+
+.controls {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    min-width: 80px;
+    font-family: inherit;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.control-btn.active {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+}
+
+.btn-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.btn-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* ================================
+   FOOTER
+   ================================ */
+.app-footer {
+    text-align: center;
+    padding-top: 2rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* ================================
+   NOTE GRID (Clickable positions)
+   ================================ */
+.note-grid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 15px;   /* Same as strings container */
+    bottom: 15px; /* Same as strings container */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Match strings layout */
+    z-index: 20;
+}
+
+.note-row {
+    display: flex;
+    align-items: center;
+    height: 0; /* Zero height - positions row exactly on string line */
+    position: relative;
+}
+
+.note-position {
+    height: 28px; /* Clickable area height, extends equally above/below string */
+    margin-top: -14px; /* Center on the string line */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: background var(--transition-fast);
+}
+
+/* Fret 0 (open string) - sits over the nut area */
+.note-position[data-fret="0"] {
+    flex: 0 0 8px;
+    width: 8px;
+}
+
+/* Frets 1-22 - distributed evenly in the fret area */
+.note-position:not([data-fret="0"]) {
+    flex: 1;
+}
+
+.note-position:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Note markers positioned within note-position - centered on string */
+.note-position .note-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ================================
+   ANIMATIONS
+   ================================ */
+
+/* String Vibration Animation */
+@keyframes vibrate {
+    0%, 100% { transform: translateY(0); }
+    10% { transform: translateY(-2px); }
+    20% { transform: translateY(2px); }
+    30% { transform: translateY(-1.5px); }
+    40% { transform: translateY(1.5px); }
+    50% { transform: translateY(-1px); }
+    60% { transform: translateY(1px); }
+    70% { transform: translateY(-0.5px); }
+    80% { transform: translateY(0.5px); }
+    90% { transform: translateY(-0.25px); }
+}
+
+.string.vibrating {
+    animation: vibrate 0.3s ease-out;
+}
+
+/* Glow Effect for Active Notes */
+.note-marker {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    z-index: 10;
+}
+
+/* Cyan Glow (Default) */
+.note-marker.active {
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(0, 245, 255, 0.9) 0%,
+        rgba(0, 200, 220, 1) 100%
+    );
+    color: #000;
+    box-shadow: 
+        0 0 10px var(--accent-cyan),
+        0 0 20px var(--accent-cyan),
+        0 0 30px rgba(0, 245, 255, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Amber Glow (Root Note) */
+.note-marker.root {
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 200, 50, 0.9) 0%,
+        rgba(255, 160, 0, 1) 100%
+    );
+    color: #000;
+    box-shadow: 
+        0 0 10px var(--accent-amber),
+        0 0 20px var(--accent-amber),
+        0 0 30px rgba(255, 184, 0, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Glow Pulse Animation */
+@keyframes glow-pulse {
+    0%, 100% { 
+        box-shadow: 
+            0 0 10px var(--accent-cyan),
+            0 0 20px var(--accent-cyan),
+            0 0 30px rgba(0, 245, 255, 0.5),
+            0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    50% { 
+        box-shadow: 
+            0 0 15px var(--accent-cyan),
+            0 0 30px var(--accent-cyan),
+            0 0 45px rgba(0, 245, 255, 0.6),
+            0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ================================
+   SEARCH RESULTS DROPDOWN
+   ================================ */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+}
+
+.search-panel {
+    position: relative;
+}
+
+.results-header {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-wrap: wrap;
+}
+
+.search-result-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.search-result-item.chord-result:hover {
+    background: rgba(0, 245, 255, 0.1);
+    border-left: 3px solid var(--accent-cyan);
+}
+
+.search-result-item.song-result:hover {
+    background: rgba(168, 85, 247, 0.1);
+    border-left: 3px solid var(--accent-purple);
+}
+
+.result-icon {
+    font-size: 1.25rem;
+}
+
+.result-text {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.result-text strong {
+    color: var(--accent-cyan);
+}
+
+.result-chords {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    width: 100%;
+    margin-top: 0.25rem;
+    padding-left: 2rem;
+}
+
+.song-info {
+    flex: 1;
+}
+
+.song-key {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.song-chords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.chord-tag {
+    background: rgba(0, 245, 255, 0.15);
+    color: var(--accent-cyan);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.chord-tag:hover {
+    background: rgba(0, 245, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.no-result {
+    color: var(--text-muted);
+    font-style: italic;
+    justify-content: center;
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+@media (max-width: 1024px) {
+    .app-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .app-title {
+        font-size: 2rem;
+    }
+    
+    .fretboard-panel {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-title {
+        font-size: 1.75rem;
+    }
+    
+    .app-subtitle {
+        font-size: 0.875rem;
+    }
+    
+    .search-panel {
+        padding: 0.875rem 1rem;
+    }
+    
+    .control-btn {
+        min-width: 70px;
+        padding: 0.625rem 1rem;
+    }
+    
+    .btn-icon {
+        font-size: 1rem;
+    }
+    
+    .btn-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* ================================
+   PROGRESSION BAR
+   ================================ */
+.progression-container {
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.progression-chips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.progression-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    min-width: 70px;
+    font-family: inherit;
+    color: var(--text-secondary);
+}
+
+.progression-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.progression-chip.active {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 
+        0 0 20px rgba(0, 245, 255, 0.3),
+        0 4px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px) scale(1.05);
+}
+
+.chip-number {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: rgba(0, 245, 255, 0.2);
+    color: var(--accent-cyan);
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+}
+
+.progression-chip.active .chip-number {
+    background: var(--accent-cyan);
+    color: #000;
+}
+
+.chip-chord {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.chip-fret {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+.chip-arrow {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Progression Controls */
+.progression-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.prog-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+.prog-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--text-primary);
+}
+
+.prog-btn.active {
+    background: rgba(0, 245, 255, 0.15);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
+.prog-btn.play-btn {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+}
+
+.prog-btn.play-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+}
+
+/* Tempo Control */
+.tempo-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.tempo-control label {
+    font-size: 1rem;
+}
+
+.tempo-control input[type="range"] {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.tempo-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 245, 255, 0.5);
+}
+
+#tempo-value {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    min-width: 55px;
+}
+
+/* Progression Preview in Search */
+.progression-preview {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+}
+
+.progression-preview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.preview-chords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.progression-preview small {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Responsive Progression */
+@media (max-width: 768px) {
+    .progression-chips {
+        gap: 0.25rem;
+    }
+    
+    .progression-chip {
+        min-width: 55px;
+        padding: 0.4rem 0.5rem;
+    }
+    
+    .chip-chord {
+        font-size: 0.85rem;
+    }
+    
+    .progression-controls {
+        gap: 0.5rem;
+    }
+    
+    .prog-btn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .tempo-control {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+    }
+}

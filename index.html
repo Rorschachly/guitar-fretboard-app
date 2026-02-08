@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Fretboard Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tone.js for audio synthesis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">Guitar Fretboard</h1>
+            <p class="app-subtitle">Chord & Scale Visualizer</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Bar Area -->
+            <section class="search-panel glass-panel">
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        placeholder="Search chords... (e.g., Cmaj7, Am, G#dim)"
+                        aria-label="Search for chords"
+                    >
+                    <button class="search-btn" aria-label="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Fretboard Container -->
+            <section class="fretboard-panel glass-panel">
+                <div class="fretboard-container" id="fretboard">
+                    <!-- Fret Numbers -->
+                    <div class="fret-numbers">
+                        <span class="fret-number">0</span>
+                        <span class="fret-number">1</span>
+                        <span class="fret-number">2</span>
+                        <span class="fret-number">3</span>
+                        <span class="fret-number">4</span>
+                        <span class="fret-number">5</span>
+                        <span class="fret-number">6</span>
+                        <span class="fret-number">7</span>
+                        <span class="fret-number">8</span>
+                        <span class="fret-number">9</span>
+                        <span class="fret-number">10</span>
+                        <span class="fret-number">11</span>
+                        <span class="fret-number">12</span>
+                    </div>
+                    
+                    <!-- The Fretboard -->
+                    <div class="fretboard">
+                        <!-- Nut -->
+                        <div class="nut"></div>
+                        
+                        <!-- Frets -->
+                        <div class="frets">
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                            <div class="fret"></div>
+                        </div>
+
+                        <!-- Fret Markers -->
+                        <div class="fret-markers">
+                            <div class="marker" data-fret="3"></div>
+                            <div class="marker" data-fret="5"></div>
+                            <div class="marker" data-fret="7"></div>
+                            <div class="marker" data-fret="9"></div>
+                            <div class="marker double" data-fret="12"></div>
+                        </div>
+
+                        <!-- Strings -->
+                        <div class="strings">
+                            <div class="string string-6" data-string="6" data-note="E"></div>
+                            <div class="string string-5" data-string="5" data-note="A"></div>
+                            <div class="string string-4" data-string="4" data-note="D"></div>
+                            <div class="string string-3" data-string="3" data-note="G"></div>
+                            <div class="string string-2" data-string="2" data-note="B"></div>
+                            <div class="string string-1" data-string="1" data-note="E"></div>
+                        </div>
+
+                        <!-- String Labels -->
+                        <div class="string-labels">
+                            <span class="string-label">E</span>
+                            <span class="string-label">A</span>
+                            <span class="string-label">D</span>
+                            <span class="string-label">G</span>
+                            <span class="string-label">B</span>
+                            <span class="string-label">e</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Control Panel -->
+            <section class="control-panel glass-panel">
+                <div class="controls">
+                    <button class="control-btn active">
+                        <span class="btn-icon">♯</span>
+                        <span class="btn-label">Sharps</span>
+                    </button>
+                    <button class="control-btn">
+                        <span class="btn-icon">♭</span>
+                        <span class="btn-label">Flats</span>
+                    </button>
+                    <button class="control-btn">
+                        <span class="btn-icon">◉</span>
+                        <span class="btn-label">Root</span>
+                    </button>
+                    <button class="control-btn active" id="sound-btn">
+                        <span class="btn-icon">🔊</span>
+                        <span class="btn-label">Sound</span>
+                    </button>
+                    <button class="control-btn strum-btn" id="strum-btn">
+                        <span class="btn-icon">🎸</span>
+                        <span class="btn-label">Strum</span>
+                    </button>
+                    <button class="control-btn">
+                        <span class="btn-icon">↻</span>
+                        <span class="btn-label">Clear</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Built for intermediate guitar learners</p>
+        </footer>
+    </div>
+</body>
+</html>
