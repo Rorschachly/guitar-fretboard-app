@@ -854,22 +854,22 @@ function parseChordName(chordName) {
     let quality = 'major'; // default
     const qualityLower = qualityPart.toLowerCase();
     
-    // Match quality patterns (order matters - longer patterns first)
+    // Match quality patterns (order matters - longer patterns first, and case-sensitive patterns before case-insensitive)
     const qualityPatterns = [
         { pattern: /^m7b5|^min7b5|^ø/i, quality: 'm7b5' },
         { pattern: /^mmaj7|^minmaj7/i, quality: 'mMaj7' },
-        { pattern: /^maj7|^M7|^Δ7/i, quality: 'maj7' },
-        { pattern: /^maj9|^M9/i, quality: 'maj9' },
+        { pattern: /^m7|^min7|-7/, quality: 'm7' },         // m7 MUST come before maj7 (no i flag - case sensitive)
+        { pattern: /^m9|^min9/, quality: 'm9' },            // m9 before maj9 (case sensitive)
+        { pattern: /^m6|^min6/, quality: 'm6' },            // case sensitive for minor
+        { pattern: /^m|^min|-/, quality: 'minor' },         // minor before major patterns (case sensitive)
+        { pattern: /^maj7|^M7|^Δ7/, quality: 'maj7' },      // Now case-sensitive to avoid matching m7
+        { pattern: /^maj9|^M9/, quality: 'maj9' },          // case-sensitive
         { pattern: /^dim7|^°7/i, quality: 'dim7' },
         { pattern: /^aug7|^\+7/i, quality: 'aug7' },
         { pattern: /^7sus4/i, quality: '7sus4' },
         { pattern: /^add9/i, quality: 'add9' },
         { pattern: /^sus2/i, quality: 'sus2' },
         { pattern: /^sus4|^sus/i, quality: 'sus4' },
-        { pattern: /^m9|^min9/i, quality: 'm9' },
-        { pattern: /^m7|^min7|-7/i, quality: 'm7' },
-        { pattern: /^m6|^min6/i, quality: 'm6' },
-        { pattern: /^m|^min|-/i, quality: 'minor' },
         { pattern: /^dim|^°/i, quality: 'dim' },
         { pattern: /^aug|^\+/i, quality: 'aug' },
         { pattern: /^9/i, quality: '9' },
@@ -1514,6 +1514,8 @@ function generateAllVoicings(chordName, maxFret = 15) {
     const rootIndex = getNoteIndex(root);
     const voicings = [];
     
+    console.log(`generateAllVoicings: ${chordName} -> root=${root}, quality=${quality}`);
+    
     // Map chord quality to CAGED shape quality
     const qualityMap = {
         'major': 'major',
@@ -1528,6 +1530,7 @@ function generateAllVoicings(chordName, maxFret = 15) {
     };
     
     const shapeQuality = qualityMap[quality] || 'major';
+    console.log(`  shapeQuality mapped to: ${shapeQuality}`);
     
     // Generate voicings from each CAGED shape
     for (const [shapeName, shapes] of Object.entries(CAGED_SHAPES)) {
